@@ -335,10 +335,35 @@
     </footer>
 
     <!-- Chat Widget -->
-    <button id="chat-widget-button">💬</button>
-    <div id="chat-widget-container" style="display: none;">
-        <!-- Your chat widget will be inserted here -->
+<button id="chat-widget-button">💬</button>
+
+<div id="chat-widget-container" style="display: none;">
+  <!-- 1. 標頭 -->
+  <div id="chat-widget-header">
+    <span>🤖 AI Shopping Assistant</span>
+    <button onclick="closeChatWidget()">✖</button>
+  </div>
+
+  <!-- 2. 訊息顯示區 -->
+  <div id="chat-widget-body">
+    <div class="bot-message chat-message">
+      <div>
+        <strong>Hi 👋 Welcome to our Demo Store!</strong><br><br>
+        I'm your AI shopping assistant. How can I help you today?
+      </div>
     </div>
+    <div class="quick-replies">
+      <button class="quick-reply-btn" onclick="sendQuickReply('顯示所有產品')">顯示所有產品</button>
+      <button class="quick-reply-btn" onclick="sendQuickReply('Show me laptops')">Show me laptops</button>
+    </div>
+  </div>
+
+  <!-- 3. 底部輸入框 + 送出鈕 -->
+  <div id="chat-widget-footer">
+    <input type="text" id="chat-widget-input" placeholder="Type your message here..." />
+    <button id="chat-widget-send">Send</button>
+  </div>
+</div>
 
     <!-- Scripts -->
     <script>
