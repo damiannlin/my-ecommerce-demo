@@ -389,18 +389,264 @@
         });
     </script>
 
-    <!-- 
-    ========================================
-    在這裡插入您的 n8n Chat Widget 代碼
-    ========================================
-    -->
-    
-    <!-- 將下面的代碼替換為您的實際 chat widget 代碼 -->
-    <script>
-        // 臨時的 chat widget 代碼（請替換為您的實際代碼）
-        document.getElementById('chat-widget-button').addEventListener('click', function() {
-            alert('請將此處替換為您的 n8n chat widget 代碼！\n\n1. 從 n8n 複製 chat widget HTML\n2. 替換這段 script\n3. 更新 webhook URL');
+<!-- 將這段代碼插入到 index.html 的 </body> 標籤之前 -->
+
+<!-- Chat Widget Container -->
+<div id="chat-widget-container" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden;
+">
+    <div id="chat-widget-header" style="
+        background: #854fff;
+        color: white;
+        padding: 20px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+    ">
+        <span>AI Assistant</span>
+        <button onclick="closeChatWidget()" style="
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        ">✖</button>
+    </div>
+    <div id="chat-widget-body" style="
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background: #f9f9f9;
+    ">
+        <p style="
+            background: #854fff;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        "><strong>Hi 👋 Welcome to our store!</strong><br>
+        How can I help you today? You can ask me about products, prices, or any questions!</p>
+    </div>
+    <div id="chat-widget-footer" style="
+        padding: 12px;
+        border-top: 1px solid #ddd;
+        display: flex;
+        gap: 10px;
+        background: white;
+    ">
+        <input type="text" id="chat-widget-input" placeholder="Type your message here..." style="
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+        ">
+        <button id="chat-widget-send" style="
+            background: #854fff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        ">Send</button>
+    </div>
+</div>
+
+<!-- Chat Widget Script -->
+<script>
+    // 配置您的 n8n webhook URL
+    window.ChatWidgetConfig = {
+        webhook: {
+            // 重要：將下面的 URL 替換為您的實際 n8n webhook URL
+            url: 'YOUR-N8N-WEBHOOK-URL-HERE',
+            route: 'general'
+        }
+    };
+
+    // Chat ID 管理
+    function getChatId() {
+        let chatId = sessionStorage.getItem("chatId");
+        if (!chatId) {
+            chatId = "chat_" + Math.random().toString(36).substr(2, 9);
+            sessionStorage.setItem("chatId", chatId);
+        }
+        return chatId;
+    }
+
+    // 開啟/關閉聊天視窗
+    document.getElementById("chat-widget-button").addEventListener("click", function() {
+        document.getElementById("chat-widget-container").style.display = "flex";
+        document.getElementById("chat-widget-button").style.display = "none";
+        document.getElementById("chat-widget-input").focus();
+    });
+
+    function closeChatWidget() {
+        document.getElementById("chat-widget-container").style.display = "none";
+        document.getElementById("chat-widget-button").style.display = "flex";
+    }
+
+    // 發送訊息
+    function sendMessage() {
+        let message = document.getElementById("chat-widget-input").value;
+        if (message.trim() === "") return;
+
+        let chatBody = document.getElementById("chat-widget-body");
+        
+        // 顯示用戶訊息
+        let userMessage = document.createElement("p");
+        userMessage.style.cssText = "text-align: right; margin: 10px 0;";
+        userMessage.innerHTML = `<span style="
+            background: #e3f2fd;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 18px;
+            display: inline-block;
+            max-width: 80%;
+            word-wrap: break-word;
+        ">${message}</span>`;
+        chatBody.appendChild(userMessage);
+
+        // 顯示載入中
+        let loadingMessage = document.createElement("p");
+        loadingMessage.id = "loading-message";
+        loadingMessage.style.cssText = "margin: 10px 0;";
+        loadingMessage.innerHTML = `<span style="
+            background: #f0f0f0;
+            color: #666;
+            padding: 10px 15px;
+            border-radius: 18px;
+            display: inline-block;
+        ">Thinking...</span>`;
+        chatBody.appendChild(loadingMessage);
+
+        // 滾動到底部
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        let chatId = getChatId();
+
+        // 發送到 n8n
+        fetch(window.ChatWidgetConfig.webhook.url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                chatId: chatId,
+                message: message,
+                route: window.ChatWidgetConfig.webhook.route
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // 移除載入訊息
+            document.getElementById("loading-message").remove();
+            
+            // 顯示 AI 回應
+            let botMessage = document.createElement("div");
+            botMessage.style.cssText = "margin: 10px 0;";
+            botMessage.innerHTML = `<div style="
+                background: #854fff;
+                color: white;
+                padding: 15px;
+                border-radius: 18px;
+                max-width: 85%;
+                word-wrap: break-word;
+            ">${data.output || data.text || data.response || "Sorry, I couldn't understand that. Please try again."}</div>`;
+            chatBody.appendChild(botMessage);
+            
+            // 滾動到底部
+            chatBody.scrollTop = chatBody.scrollHeight;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById("loading-message").remove();
+            
+            let errorMessage = document.createElement("p");
+            errorMessage.innerHTML = `<span style="
+                background: #ffebee;
+                color: #c62828;
+                padding: 10px 15px;
+                border-radius: 18px;
+                display: inline-block;
+            ">Sorry, there was an error. Please check if the webhook URL is configured correctly.</span>`;
+            chatBody.appendChild(errorMessage);
         });
-    </script>
-</body>
-</html>
+
+        // 清空輸入框
+        document.getElementById("chat-widget-input").value = "";
+    }
+
+    // 綁定發送按鈕
+    document.getElementById("chat-widget-send").addEventListener("click", sendMessage);
+
+    // Enter 鍵發送
+    document.getElementById("chat-widget-input").addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            sendMessage();
+        }
+    });
+
+    // 快速回覆按鈕（可選）
+    function addQuickReplies() {
+        const quickReplies = [
+            "Show me electronics",
+            "Products under $50",
+            "I need help",
+            "顯示所有產品"
+        ];
+        
+        let chatBody = document.getElementById("chat-widget-body");
+        let quickReplyContainer = document.createElement("div");
+        quickReplyContainer.style.cssText = "margin: 15px 0; text-align: center;";
+        
+        quickReplies.forEach(reply => {
+            let button = document.createElement("button");
+            button.textContent = reply;
+            button.style.cssText = `
+                background: white;
+                border: 1px solid #854fff;
+                color: #854fff;
+                padding: 6px 12px;
+                border-radius: 15px;
+                margin: 3px;
+                cursor: pointer;
+                font-size: 12px;
+                transition: all 0.3s;
+            `;
+            button.onmouseover = function() {
+                this.style.background = "#854fff";
+                this.style.color = "white";
+            };
+            button.onmouseout = function() {
+                this.style.background = "white";
+                this.style.color = "#854fff";
+            };
+            button.onclick = function() {
+                document.getElementById("chat-widget-input").value = reply;
+                sendMessage();
+            };
+            quickReplyContainer.appendChild(button);
+        });
+        
+        chatBody.appendChild(quickReplyContainer);
+    }
+
+    // 頁面載入時添加快速回覆
+    window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(addQuickReplies, 1000);
+    });
+</script>
