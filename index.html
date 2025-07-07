@@ -1,271 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>E-Commerce Demo Store - AI Chatbot Showcase</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f5f5;
-            color: #333;
-        }
-        
-        /* Header */
-        header {
-            background: #854fff;
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-        
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.8s ease;
-        }
-        
-        .hero p {
-            font-size: 20px;
-            opacity: 0.9;
-            animation: fadeInUp 0.8s ease 0.2s;
-            animation-fill-mode: backwards;
-        }
-        
-        /* Products Grid */
-        .products {
-            padding: 60px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 50px;
-            color: #333;
-        }
-        
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-        
-        .product-image {
-            width: 100%;
-            height: 250px;
-            object-fit: contain;
-            background: #f9f9f9;
-            padding: 20px;
-        }
-        
-        .product-info {
-            padding: 20px;
-        }
-        
-        .product-title {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #333;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .product-price {
-            font-size: 24px;
-            font-weight: bold;
-            color: #854fff;
-            margin-bottom: 15px;
-        }
-        
-        .product-rating {
-            color: #ff9800;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        
-        .btn-primary {
-            background: #854fff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-        }
-        
-        .btn-primary:hover {
-            background: #6b3fd4;
-            transform: scale(1.05);
-        }
-        
-        /* Chat Widget Placeholder */
-        .chat-section {
-            background: #f0f4ff;
-            padding: 60px 0;
-            text-align: center;
-        }
-        
-        .chat-demo {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        /* Footer */
-        footer {
-            background: #333;
-            color: white;
-            padding: 40px 0;
-            text-align: center;
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Loading Spinner */
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-        
-        .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #854fff;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Chat Button Style */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #333; }
+        header { background: #854fff; color: white; padding: 1rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { color: white; text-decoration: none; transition: opacity 0.3s; }
+        .nav-links a:hover { opacity: 0.8; }
+
+        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 80px 0; text-align: center; }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; animation: fadeInUp 0.8s ease; }
+        .hero p { font-size: 20px; opacity: 0.9; animation: fadeInUp 0.8s ease 0.2s; animation-fill-mode: backwards; }
+
+        .products { padding: 60px 0; }
+        .section-title { text-align: center; font-size: 36px; margin-bottom: 50px; color: #333; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; margin-bottom: 40px; }
+        .product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .product-image { width: 100%; height: 250px; object-fit: contain; background: #f9f9f9; padding: 20px; }
+        .product-info { padding: 20px; }
+        .product-title { font-size: 18px; margin-bottom: 10px; color: #333; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .product-price { font-size: 24px; font-weight: bold; color: #854fff; margin-bottom: 15px; }
+        .product-rating { color: #ff9800; font-size: 14px; margin-bottom: 15px; }
+        .btn-primary { background: #854fff; color: white; border: none; padding: 10px 20px; border-radius: 25px; font-size: 14px; font-weight: bold; cursor: pointer; transition: all 0.3s; width: 100%; }
+        .btn-primary:hover { background: #6b3fd4; transform: scale(1.05); }
+
+        .chat-section { background: #f0f4ff; padding: 60px 0; text-align: center; }
+        .chat-demo { background: white; border-radius: 20px; padding: 40px; max-width: 600px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+        footer { background: #333; color: white; padding: 40px 0; text-align: center; }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Chat Widget Styles */
         #chat-widget-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #854fff;
-            color: white;
-            border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 24px;
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s;
+            position: fixed; bottom: 20px; right: 20px;
+            background: #854fff; color: white; border: none;
+            width: 60px; height: 60px; border-radius: 50%;
+            cursor: pointer; font-size: 24px; z-index: 1001;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: all 0.3s;
         }
-        
-        #chat-widget-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        #chat-widget-button:hover { transform: scale(1.1); box-shadow: 0 6px 15px rgba(0,0,0,0.4); }
+
+        #chat-widget-container {
+            position: fixed; bottom: 20px; right: 20px;
+            width: 350px; height: 500px;
+            background: #fff; border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            display: none; flex-direction: column; z-index: 1000; overflow: hidden;
         }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 32px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 20px;
-            }
-        }
+        #chat-widget-header { background: #854fff; color: white; padding: 16px; display: flex; justify-content: space-between; align-items: center; }
+        #chat-widget-header button { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
+        #chat-widget-body { flex: 1; padding: 12px; overflow-y: auto; background: #f9f9f9; }
+        .chat-message { margin: 8px 0; }
+        .user-message span { background: #e3f2fd; padding: 8px 12px; border-radius: 16px 16px 4px 16px; display: inline-block; max-width: 80%; }
+        .bot-message div { background: #854fff; color: white; padding: 10px 14px; border-radius: 16px 16px 16px 4px; display: inline-block; max-width: 85%; }
+        #chat-widget-footer { padding: 8px; border-top: 1px solid #ddd; display: flex; gap: 6px; background: white; }
+        #chat-widget-input { flex: 1; padding: 8px 12px; border: 1px solid #ddd; border-radius: 20px; outline: none; }
+        #chat-widget-send { background: #854fff; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -334,47 +134,37 @@
         </div>
     </footer>
 
-<!-- Chat Widget -->
-<button id="chat-widget-button">💬</button>
+    <!-- Chat Widget Button -->
+    <button id="chat-widget-button">💬</button>
 
-<div id="chat-widget-container" style="display: none;">
-  <!-- 1. 標頭（header）-->
-  <div id="chat-widget-header">
-    <span>🤖 AI Shopping Assistant</span>
-    <button onclick="closeChatWidget()">✖</button>
-  </div>
-
-  <!-- 2. 訊息顯示區（body） -->
-  <div id="chat-widget-body">
-    <div class="bot-message chat-message">
-      <div>
-        <strong>Hi 👋 Welcome to our Demo Store!</strong><br><br>
-        I'm your AI shopping assistant. How can I help you today?
-      </div>
+    <!-- Chat Widget Container -->
+    <div id="chat-widget-container">
+        <div id="chat-widget-header">
+            <span>🤖 AI Shopping Assistant</span>
+            <button onclick="closeChatWidget()">✖</button>
+        </div>
+        <div id="chat-widget-body">
+            <div class="bot-message chat-message">
+                <div>
+                    <strong>Hi 👋 Welcome to our Demo Store!</strong><br><br>
+                    I'm your AI shopping assistant. How can I help you today?
+                </div>
+            </div>
+        </div>
+        <div id="chat-widget-footer">
+            <input type="text" id="chat-widget-input" placeholder="Type your message here..." />
+            <button id="chat-widget-send">Send</button>
+        </div>
     </div>
-    <div class="quick-replies">
-      <button class="quick-reply-btn" onclick="sendQuickReply('顯示所有產品')">顯示所有產品</button>
-      <button class="quick-reply-btn" onclick="sendQuickReply('Show me laptops')">Show me laptops</button>
-    </div>
-  </div>
 
-  <!-- 3. 底部輸入欄 + 送出鈕（footer） -->
-  <div id="chat-widget-footer">
-    <input type="text" id="chat-widget-input" placeholder="Type your message here..." />
-    <button id="chat-widget-send">Send</button>
-  </div>
-</div>
-
-    <!-- Scripts -->
+    <!-- Load products from Fake Store API -->
     <script>
-        // Load products from Fake Store API
         async function loadProducts() {
             try {
                 const response = await fetch('https://fakestoreapi.com/products?limit=8');
                 const products = await response.json();
-                
                 const container = document.getElementById('products-container');
-                container.innerHTML = '<div class="products-grid">' + 
+                container.innerHTML = '<div class="products-grid">' +
                     products.map(product => `
                         <div class="product-card">
                             <img src="${product.image}" alt="${product.title}" class="product-image">
@@ -390,402 +180,99 @@
                                 </button>
                             </div>
                         </div>
-                    `).join('') + 
+                    `).join('') +
                 '</div>';
             } catch (error) {
                 console.error('Error loading products:', error);
-                document.getElementById('products-container').innerHTML = 
+                document.getElementById('products-container').innerHTML =
                     '<p style="text-align: center; color: #666;">Error loading products. Please refresh the page.</p>';
             }
         }
-
-        // Load products when page loads
         window.addEventListener('DOMContentLoaded', loadProducts);
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
     </script>
 
     <!-- n8n Chat Widget Integration -->
-    <style>
-        /* Chat Widget Styles */
-        #chat-widget-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 350px;
-            height: 500px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            display: none;
-            flex-direction: column;
-            z-index: 1000;
-            overflow: hidden;
-        }
-        
-        #chat-widget-header {
-            background: #854fff;
-            color: white;
-            padding: 20px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 18px;
-        }
-        
-        #chat-widget-header button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.3s;
-        }
-        
-        #chat-widget-header button:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        #chat-widget-body {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            background: #f9f9f9;
-        }
-        
-        #chat-widget-body::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        #chat-widget-body::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        #chat-widget-body::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 3px;
-        }
-        
-        #chat-widget-body::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-        
-        .chat-message {
-            margin: 10px 0;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .user-message {
-            text-align: right;
-        }
-        
-        .user-message span {
-            background: #e3f2fd;
-            color: #333;
-            padding: 10px 15px;
-            border-radius: 18px 18px 4px 18px;
-            display: inline-block;
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-        
-        .bot-message {
-            text-align: left;
-        }
-        
-        .bot-message div {
-            background: #854fff;
-            color: white;
-            padding: 15px;
-            border-radius: 18px 18px 18px 4px;
-            display: inline-block;
-            max-width: 85%;
-            word-wrap: break-word;
-        }
-        
-        .bot-message a {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-        
-        .loading-message span {
-            background: #f0f0f0;
-            color: #666;
-            padding: 10px 15px;
-            border-radius: 18px;
-            display: inline-block;
-        }
-        
-        .loading-dots {
-            display: inline-block;
-            animation: loading 1.4s infinite;
-        }
-        
-        @keyframes loading {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-10px); }
-        }
-        
-        #chat-widget-footer {
-            padding: 12px;
-            border-top: 1px solid #ddd;
-            display: flex;
-            gap: 10px;
-            background: white;
-        }
-        
-        #chat-widget-input {
-            flex: 1;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 25px;
-            outline: none;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-        
-        #chat-widget-input:focus {
-            border-color: #854fff;
-        }
-        
-        #chat-widget-send {
-            background: #854fff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        
-        #chat-widget-send:hover {
-            background: #6b3fd4;
-            transform: scale(1.05);
-        }
-        
-        #chat-widget-send:active {
-            transform: scale(0.95);
-        }
-        
-        .quick-replies {
-            margin: 15px 0;
-            text-align: center;
-        }
-        
-        .quick-reply-btn {
-            background: white;
-            border: 1px solid #854fff;
-            color: #854fff;
-            padding: 6px 12px;
-            border-radius: 15px;
-            margin: 3px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s;
-        }
-        
-        .quick-reply-btn:hover {
-            background: #854fff;
-            color: white;
-            transform: scale(1.05);
-        }
-    </style>
-
-    <!-- Chat Widget HTML -->
-    <div id="chat-widget-container">
-        <div id="chat-widget-header">
-            <span>🤖 AI Shopping Assistant</span>
-            <button onclick="closeChatWidget()">✖</button>
-        </div>
-        <div id="chat-widget-body">
-            <div class="bot-message chat-message">
-                <div>
-                    <strong>Hi 👋 Welcome to our Demo Store!</strong><br><br>
-                    I'm your AI shopping assistant. I can help you:<br>
-                    • Find products<br>
-                    • Answer questions<br>
-                    • Process orders<br>
-                    • Provide support<br><br>
-                    How can I help you today?
-                </div>
-            </div>
-            <div class="quick-replies">
-                <button class="quick-reply-btn" onclick="sendQuickReply('Show me electronics')">Show me electronics</button>
-                <button class="quick-reply-btn" onclick="sendQuickReply('Products under $50')">Products under $50</button>
-                <button class="quick-reply-btn" onclick="sendQuickReply('I need help')">I need help</button>
-            </div>
-        </div>
-        <div id="chat-widget-footer">
-            <input type="text" id="chat-widget-input" placeholder="Type your message here..." />
-            <button id="chat-widget-send">Send</button>
-        </div>
-    </div>
-
-    <!-- Chat Widget Script -->
     <script>
-        // n8n Webhook Configuration
         window.ChatWidgetConfig = {
             webhook: {
-                url: 'https://damiannstudio.app.n8n.cloud/webhook/f4b34c09-655e-4fee-8593-825a3000fcec/chat',
+                url: 'https://damiannstudio.app.n8n.cloud/webhook/f4b34c09-655e-4fee-8593-825a3000fcec',
                 route: 'general'
-            },
-            style: {
-                primaryColor: '#854fff',
-                secondaryColor: '#6b3fd4',
-                position: 'right',
-                backgroundColor: '#ffffff',
-                fontColor: '#333333'
             }
         };
 
-        // Chat ID management
         function getChatId() {
-            let chatId = sessionStorage.getItem("chatId");
-            if (!chatId) {
-                chatId = "chat_" + Math.random().toString(36).substr(2, 9);
-                sessionStorage.setItem("chatId", chatId);
+            let cid = sessionStorage.getItem('chatId');
+            if (!cid) {
+                cid = 'chat_' + Math.random().toString(36).slice(2, 11);
+                sessionStorage.setItem('chatId', cid);
             }
-            return chatId;
+            return cid;
         }
 
-        // Toggle chat widget
-        document.getElementById("chat-widget-button").addEventListener("click", function() {
-            document.getElementById("chat-widget-container").style.display = "flex";
-            document.getElementById("chat-widget-button").style.display = "none";
-            document.getElementById("chat-widget-input").focus();
+        const chatBtn = document.getElementById('chat-widget-button');
+        const chatContainer = document.getElementById('chat-widget-container');
+        chatBtn.addEventListener('click', () => {
+            chatContainer.style.display = 'flex';
+            chatBtn.style.display = 'none';
+            document.getElementById('chat-widget-input').focus();
         });
-
         function closeChatWidget() {
-            document.getElementById("chat-widget-container").style.display = "none";
-            document.getElementById("chat-widget-button").style.display = "flex";
+            chatContainer.style.display = 'none';
+            chatBtn.style.display = 'flex';
         }
 
-        // Send message function
-        function sendMessage() {
-            let message = document.getElementById("chat-widget-input").value;
-            if (message.trim() === "") return;
+        async function sendMessage() {
+            const inputEl = document.getElementById('chat-widget-input');
+            const msg = inputEl.value.trim();
+            if (!msg) return;
+            const bodyEl = document.getElementById('chat-widget-body');
 
-            let chatBody = document.getElementById("chat-widget-body");
-            
-            // Display user message
-            let userMessage = document.createElement("div");
-            userMessage.className = "user-message chat-message";
-            userMessage.innerHTML = `<span>${message}</span>`;
-            chatBody.appendChild(userMessage);
+            const um = document.createElement('div');
+            um.className = 'user-message chat-message';
+            um.innerHTML = `<span>${msg}</span>`;
+            bodyEl.appendChild(um);
 
-            // Display loading message
-            let loadingMessage = document.createElement("div");
-            loadingMessage.id = "loading-message";
-            loadingMessage.className = "bot-message chat-message loading-message";
-            loadingMessage.innerHTML = `<span>Thinking<span class="loading-dots">...</span></span>`;
-            chatBody.appendChild(loadingMessage);
+            const lm = document.createElement('div');
+            lm.id = '__loading';
+            lm.className = 'bot-message chat-message';
+            lm.innerHTML = `<div>Thinking...</div>`;
+            bodyEl.appendChild(lm);
+            bodyEl.scrollTop = bodyEl.scrollHeight;
 
-            // Scroll to bottom
-            chatBody.scrollTop = chatBody.scrollHeight;
-
-            let chatId = getChatId();
-
-            // Send to n8n
-            fetch(window.ChatWidgetConfig.webhook.url, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    chatId: chatId,
-                    message: message,
-                    sessionId: chatId,
-                    route: window.ChatWidgetConfig.webhook.route
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Remove loading message
-                document.getElementById("loading-message").remove();
-                
-                // Display bot response
-                let botMessage = document.createElement("div");
-                botMessage.className = "bot-message chat-message";
-                
-                // Extract the response from different possible fields
-                let responseText = data.output || data.text || data.response || "I'm sorry, I couldn't process that request. Please try again.";
-                
-                botMessage.innerHTML = `<div>${responseText}</div>`;
-                chatBody.appendChild(botMessage);
-                
-                // Scroll to bottom
-                chatBody.scrollTop = chatBody.scrollHeight;
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                document.getElementById("loading-message").remove();
-                
-                let errorMessage = document.createElement("div");
-                errorMessage.className = "bot-message chat-message";
-                errorMessage.innerHTML = `<div style="background: #ff5252;">Sorry, there was an error connecting to the server. Please try again later.</div>`;
-                chatBody.appendChild(errorMessage);
-            });
-
-            // Clear input
-            document.getElementById("chat-widget-input").value = "";
-        }
-
-        // Quick reply function
-        function sendQuickReply(message) {
-            document.getElementById("chat-widget-input").value = message;
-            sendMessage();
-        }
-
-        // Bind send button
-        document.getElementById("chat-widget-send").addEventListener("click", sendMessage);
-
-        // Enter key to send
-        document.getElementById("chat-widget-input").addEventListener("keypress", function(e) {
-            if (e.key === "Enter") {
-                sendMessage();
+            try {
+                const res = await fetch(window.ChatWidgetConfig.webhook.url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chatId: getChatId(),
+                        sessionId: getChatId(),
+                        message: msg,
+                        route: window.ChatWidgetConfig.webhook.route
+                    })
+                });
+                const data = await res.json();
+                document.getElementById('__loading').remove();
+                const reply = data.output || data.response || data.text || '抱歉，出錯了。';
+                const bm = document.createElement('div');
+                bm.className = 'bot-message chat-message';
+                bm.innerHTML = `<div>${reply}</div>`;
+                bodyEl.appendChild(bm);
+                bodyEl.scrollTop = bodyEl.scrollHeight;
+            } catch (e) {
+                document.getElementById('__loading').remove();
+                const err = document.createElement('div');
+                err.className = 'bot-message chat-message';
+                err.innerHTML = `<div>連線失敗，請稍後再試。</div>`;
+                bodyEl.appendChild(err);
             }
+
+            inputEl.value = '';
+        }
+
+        document.getElementById('chat-widget-send').addEventListener('click', sendMessage);
+        document.getElementById('chat-widget-input').addEventListener('keypress', e => {
+            if (e.key === 'Enter') sendMessage();
         });
-
-        // Add welcome message quick replies after a delay
-        setTimeout(() => {
-            let chatBody = document.getElementById("chat-widget-body");
-            let welcomeReplies = document.createElement("div");
-            welcomeReplies.className = "quick-replies";
-            welcomeReplies.innerHTML = `
-                <button class="quick-reply-btn" onclick="sendQuickReply('顯示所有產品')">顯示所有產品</button>
-                <button class="quick-reply-btn" onclick="sendQuickReply('Show me laptops')">Show me laptops</button>
-            `;
-            if (chatBody.children.length <= 2) {
-                chatBody.appendChild(welcomeReplies);
-            }
-        }, 2000);
     </script>
 </body>
 </html>
