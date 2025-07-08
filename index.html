@@ -240,16 +240,19 @@
             bodyEl.scrollTop = bodyEl.scrollHeight;
 
             try {
-                const res = await fetch(window.ChatWidgetConfig.webhook.url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chatId: getChatId(),
-                        sessionId: getChatId(),
-                        message: msg,
-                        route: window.ChatWidgetConfig.webhook.route
-                    })
-                });
+const res = await fetch(window.ChatWidgetConfig.webhook.url, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'x-cors-api-key': 'test_d43ad645ba8e7b34331a0118ec4104f4f2773184194d1951b151c6c04106ac99'
+    },
+    body: JSON.stringify({
+        chatId: getChatId(),
+        sessionId: getChatId(),
+        message: msg,
+        route: window.ChatWidgetConfig.webhook.route
+    })
+});
                 const data = await res.json();
                 document.getElementById('__loading').remove();
                 const reply = data.output || data.response || data.text || '抱歉，出錯了。';
