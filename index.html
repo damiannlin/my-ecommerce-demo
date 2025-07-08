@@ -164,7 +164,7 @@
             <button id="chat-widget-send">Send</button>
         </div>
     </div>
-       
+   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <!-- Load products from Fake Store API -->
     <script>
         async function loadProducts() {
@@ -262,7 +262,8 @@ const res = await fetch(window.ChatWidgetConfig.webhook.url, {
     })
 });
                 const data = await res.json();
-                document.getElementById('__loading').remove();
+                const loadingEl = document.getElementById('__loading');
+if (loadingEl) loadingEl.remove();
                 const reply = data.output || data.response || data.text || '抱歉，出錯了。';
                 const bm = document.createElement('div');
                 bm.className = 'bot-message chat-message';
@@ -270,7 +271,8 @@ const res = await fetch(window.ChatWidgetConfig.webhook.url, {
                 bodyEl.appendChild(bm);
                 bodyEl.scrollTop = bodyEl.scrollHeight;
             } catch (e) {
-                document.getElementById('__loading').remove();
+                const loadingEl = document.getElementById('__loading');
+if (loadingEl) loadingEl.remove();
                 const err = document.createElement('div');
                 err.className = 'bot-message chat-message';
                 err.innerHTML = `<div>連線失敗，請稍後再試。</div>`;
