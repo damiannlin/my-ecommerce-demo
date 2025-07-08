@@ -259,7 +259,7 @@ const res = await fetch(window.ChatWidgetConfig.webhook.url, {
                 const reply = data.output || data.response || data.text || '抱歉，出錯了。';
                 const bm = document.createElement('div');
                 bm.className = 'bot-message chat-message';
-                bm.innerHTML = `<div>${reply}</div>`;
+                bm.innerHTML = `<div>${marked.parse(reply)}</div>`;
                 bodyEl.appendChild(bm);
                 bodyEl.scrollTop = bodyEl.scrollHeight;
             } catch (e) {
